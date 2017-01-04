@@ -1,32 +1,33 @@
 package com.ses.pc.radarapp;
+public class Location
+{
+    private String longitude;
 
-/**
- * Created by pc on 02/01/2017.
- */
+    private String latitude;
 
-public class Location {
+    public String getLongitude ()
+    {
+        return longitude;
+    }
 
-    private Double latitude;
-    private Double longitude;
-
-    public Location(Double latitude, Double longitude) {
-        this.latitude = latitude;
+    public void setLongitude (String longitude)
+    {
         this.longitude = longitude;
     }
 
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
-    }
-
-    public Double getLatitude() {
+    public String getLatitude ()
+    {
         return latitude;
     }
 
-    public Double getLongitude() {
-        return longitude;
+    public void setLatitude (String latitude)
+    {
+        this.latitude = latitude;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Location [longitude = "+longitude+", latitude = "+latitude+"]";
     }
 }

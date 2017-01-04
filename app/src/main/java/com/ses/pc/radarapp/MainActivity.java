@@ -1,34 +1,50 @@
 package com.ses.pc.radarapp;
 
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Type;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Collection;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    // Direccion base para descargar informacion
+    private final static String DIR_BASE = "https://redarmyserver.appspot.com/_ah/api/myApi/v1/torretinfocollection";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         obtenerMensajeEnemigo();
 
     }
-    private static String readUrl(String urlString) throws Exception {
+
+    private void obtenerMensajeEnemigo() {
+
+        //  Log.d("RESULTADO:", chaine.toString());
+        try {
+            String json = readUrl("https://redarmyserver.appspot.com/_ah/api/myApi/v1/torretinfocollection");
+            Gson gson = new Gson();
+            Item item = gson.fromJson(json, Item.class);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // Log.d("*S*A*B*R*I*N*A*",item.toString());
+
+        //    Log.d("RESULTADO:", item.toString());
+        //   System.out.println(item.toString());
+
+    }
+
+    public static String readUrl(String urlString) throws Exception {
         BufferedReader reader = null;
         try {
             URL url = new URL(urlString);
@@ -45,33 +61,8 @@ public class MainActivity extends AppCompatActivity {
                 reader.close();
         }
     }
-    private void obtenerMensajeEnemigo() {
-
-
-        URL url = null;
-        try {
-            url = new URL("https://redarmyserver.appspot.com/_ah/api/myApi/v1/torretinfocollection");
-
-            InputStreamReader reader = new InputStreamReader(url.openStream());
-
-            Gson gson = new Gson();
-
-            Item[] items =  gson.fromJson(reader, Item[].class);
-
-
-           // Log.d("RESULTADO:",items.toString());
-           // System.out.println(items.toString());
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        // String json = readUrl("https://redarmyserver.appspot.com/_ah/api/myApi/v1/torretinfocollection");
-
-    }
-
 
 }
+
+
+
