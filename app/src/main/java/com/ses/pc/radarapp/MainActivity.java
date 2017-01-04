@@ -27,40 +27,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void obtenerMensajeEnemigo() {
-
-        //  Log.d("RESULTADO:", chaine.toString());
         try {
-            String json = readUrl("https://redarmyserver.appspot.com/_ah/api/myApi/v1/torretinfocollection");
+            ParseJson parse = new ParseJson();
+            String json = parse.readUrl("https://redarmyserver.appspot.com/_ah/api/myApi/v1/torretinfocollection");
             Gson gson = new Gson();
             Item item = gson.fromJson(json, Item.class);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // Log.d("*S*A*B*R*I*N*A*",item.toString());
-
-        //    Log.d("RESULTADO:", item.toString());
-        //   System.out.println(item.toString());
 
     }
 
-    public static String readUrl(String urlString) throws Exception {
-        BufferedReader reader = null;
-        try {
-            URL url = new URL(urlString);
-            reader = new BufferedReader(new InputStreamReader(url.openStream()));
-            StringBuffer buffer = new StringBuffer();
-            int read;
-            char[] chars = new char[1024];
-            while ((read = reader.read(chars)) != -1)
-                buffer.append(chars, 0, read);
 
-            return buffer.toString();
-        } finally {
-            if (reader != null)
-                reader.close();
-        }
-    }
 
 }
 
