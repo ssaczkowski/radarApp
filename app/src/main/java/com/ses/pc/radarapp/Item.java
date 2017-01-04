@@ -1,15 +1,24 @@
 package com.ses.pc.radarapp;
 
+import com.google.gson.annotations.SerializedName;
 import  com.ses.pc.radarapp.Location;
 
 
 public class Item {
-
+    @SerializedName("location")
     private Location location;
+    @SerializedName("radius")
     private Double radius;
+    @SerializedName("code")
     private String code;
+    @SerializedName("radiusInMeter")
     private Double radiusInMeter;
+    @SerializedName("kind")
     private String kind;
+
+    public Item(){
+
+    }
 
     public Item(Location location, Double radius, String code, Double radiusInMeter, String kind) {
         this.location = location;
