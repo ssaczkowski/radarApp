@@ -3,8 +3,10 @@ package com.ses.pc.radarapp;
 import com.google.gson.annotations.SerializedName;
 import  com.ses.pc.radarapp.Location;
 
+import java.io.Serializable;
 
-public class Item {
+
+public class Item implements Serializable {
     @SerializedName("location")
     private Location location;
     @SerializedName("radius")

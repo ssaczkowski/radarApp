@@ -1,8 +1,14 @@
 package com.ses.pc.radarapp;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.junit.Test;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -63,18 +69,23 @@ public class ParseTest {
     }
 
 
-
 /*
+
     @Test
     public void parseGson() throws Exception {
         ParseJson parse = new ParseJson();
-        String json = parse.readUrl("https://redarmyserver.appspot.com/_ah/api/myApi/v1/torretinfocollection");
-        Gson gson = new Gson();
-        Item item = gson.fromJson(json, Item.class);
+        //final String json = parse.readUrl("https://redarmyserver.appspot.com/_ah/api/myApi/v1/torretinfocollection");
 
-        String result = item.getCode();
-        //ACÀ RESULT VALE NULL, CREO QUE DEBERIA SER UNA LISTA.
-        assertEquals("fruta", result);
+        String json = "{\"item\": {\"radius\": 1, \"code\": \"RollLaser\",\"radiusInMeter\": 50, \"kind\": \"myApi#resourcesItem\"}}\n";
+        Gson gson = new Gson();
+        //Item[] array = gson.fromJson(json, Item[].class);
+        //final Type tipoListaItems = new TypeToken<List<Item>>(){}.getType();
+        Item item = gson.fromJson(json, Item.class);
+        //List<Item> items = gson.fromJson(json, tipoListaItems);
+        //Item[] enums = gson.fromJson(json, Item[].class);
+       // Type collectionType = new TypeToken<Collection<Item>>(){}.getType();
+       // Collection<Item> enums = gson.fromJson(json, collectionType);
+        assertEquals(3, item.getCode());
     }
 
 

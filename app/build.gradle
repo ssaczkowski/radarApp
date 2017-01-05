@@ -31,3 +31,12 @@ dependencies {
 
 
 }
+
+sourceSets {
+
+    test {
+        java {
+            srcDirs = ["Android/radarApp/app/src/test"]
+        }
+    }
+}
