@@ -7,14 +7,14 @@ android:
     - tools # see https://github.com/travis-ci/travis-ci/issues/6040#issuecomment-219367943)
     - platform-tools
     - build-tools-25.0.2
-    - android-25
+    - android-24
   licenses:
     - '.+'
 
 before_script:
   - echo yes | android update sdk --no-ui --all --filter platform-tools,tools
   - echo yes | android update sdk --no-ui --all --filter build-tools-25.0.2
-  - echo yes | android update sdk --no-ui --all --filter android-25
+  - echo yes | android update sdk --no-ui --all --filter android-24
 
 script:
    - ./gradlew clean test
