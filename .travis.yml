@@ -1,6 +1,4 @@
 language: android
-jdk:
-  - oraclejdk8
 android:
   components:
     - tools # to get the new `repository-11.xml`
@@ -8,6 +6,13 @@ android:
     - platform-tools
     - build-tools-25.0.2
     - android-25
+  licenses:
+    - '.+'
+
+before_script:
+  - echo yes | android update sdk --no-ui --all --filter platform-tools,tools
+  - echo yes | android update sdk --no-ui --all --filter build-tools-25.0.2
+  - echo yes | android update sdk --no-ui --all --filter android-25
 
 script:
-   - ./gradlew build test --debug
+   - ./gradlew clean test
