@@ -23,8 +23,6 @@ public class ParseTest {
         assertEquals(4, 2 + 2);
     }
 
-
-
     @Test
     public void parse() throws Exception {
         ParseJson parse = new ParseJson();
