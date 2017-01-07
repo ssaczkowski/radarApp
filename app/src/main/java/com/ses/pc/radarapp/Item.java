@@ -1,72 +1,90 @@
 package com.ses.pc.radarapp;
-
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import  com.ses.pc.radarapp.Location;
-
-import java.io.Serializable;
 
 
-public class Item implements Serializable {
-    @SerializedName("location")
-    private Location location;
-    @SerializedName("radius")
-    private Double radius;
-    @SerializedName("code")
-    private String code;
-    @SerializedName("radiusInMeter")
-    private Double radiusInMeter;
-    @SerializedName("kind")
-    private String kind;
+public class Item {
 
-    public Item(){
+@SerializedName("location")
+@Expose
+private Location location;
+@SerializedName("radius")
+@Expose
+private int radius;
+@SerializedName("code")
+@Expose
+private String code;
+@SerializedName("radiusInMeter")
+@Expose
+private int radiusInMeter;
+@SerializedName("kind")
+@Expose
+private String kind;
 
-    }
+/**
+* No args constructor for use in serialization
+*
+*/
+public Item() {
+}
 
-    public Item(Location location, Double radius, String code, Double radiusInMeter, String kind) {
-        this.location = location;
-        this.radius = radius;
-        this.code = code;
-        this.radiusInMeter = radiusInMeter;
-        this.kind = kind;
-    }
+/**
+*
+* @param radiusInMeter
+* @param location
+* @param radius
+* @param code
+* @param kind
+*/
+public Item(Location location, int radius, String code, int radiusInMeter, String kind) {
+super();
+this.location = location;
+this.radius = radius;
+this.code = code;
+this.radiusInMeter = radiusInMeter;
+this.kind = kind;
+}
 
-    public void setLocation(Location location) {
-        this.location = location;
-    }
+public Location getLocation() {
+return location;
+}
 
-    public void setRadius(Double radius) {
-        this.radius = radius;
-    }
+public void setLocation(Location location) {
+this.location = location;
+}
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+public int getRadius() {
+return radius;
+}
 
-    public void setRadiusInMeter(Double radiusInMeter) {
-        this.radiusInMeter = radiusInMeter;
-    }
+public void setRadius(int radius) {
+this.radius = radius;
+}
 
-    public void setKind(String kind) {
-        this.kind = kind;
-    }
+public String getCode() {
+return code;
+}
 
-    public Location getLocation() {
-        return location;
-    }
+public void setCode(String code) {
+this.code = code;
+}
 
-    public Double getRadius() {
-        return radius;
-    }
+public int getRadiusInMeter() {
+return radiusInMeter;
+}
 
-    public String getCode() {
-        return code;
-    }
+public void setRadiusInMeter(int radiusInMeter) {
+this.radiusInMeter = radiusInMeter;
+}
 
-    public Double getRadiusInMeter() {
-        return radiusInMeter;
-    }
+public String getKind() {
+return kind;
+}
 
-    public String getKind() {
-        return kind;
-    }
+public void setKind(String kind) {
+this.kind = kind;
+}
+
+
+
 }

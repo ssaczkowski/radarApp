@@ -1,33 +1,52 @@
 package com.ses.pc.radarapp;
-public class Location
-{
-    private String longitude;
 
-    private String latitude;
 
-    public String getLongitude ()
-    {
-        return longitude;
-    }
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-    public void setLongitude (String longitude)
-    {
-        this.longitude = longitude;
-    }
+public class Location {
 
-    public String getLatitude ()
-    {
-        return latitude;
-    }
+@SerializedName("latitude")
+@Expose
+private double latitude;
+@SerializedName("longitude")
+@Expose
+private double longitude;
 
-    public void setLatitude (String latitude)
-    {
-        this.latitude = latitude;
-    }
+/**
+* No args constructor for use in serialization
+*
+*/
+public Location() {
+}
 
-    @Override
-    public String toString()
-    {
-        return "Location [longitude = "+longitude+", latitude = "+latitude+"]";
-    }
+/**
+*
+* @param longitude
+* @param latitude
+*/
+public Location(double latitude, double longitude) {
+super();
+this.latitude = latitude;
+this.longitude = longitude;
+}
+
+public double getLatitude() {
+return latitude;
+}
+
+public void setLatitude(double latitude) {
+this.latitude = latitude;
+}
+
+public double getLongitude() {
+return longitude;
+}
+
+public void setLongitude(double longitude) {
+this.longitude = longitude;
+}
+
+
+
 }
