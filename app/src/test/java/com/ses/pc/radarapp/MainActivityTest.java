@@ -19,32 +19,18 @@ import static org.junit.Assert.*;
  */
 public class MainActivityTest {
 
-
-      //  Direction that capture enemy messages
-      private final static String ADDS_ENEMY = "https://redarmyserver.appspot.com/_ah/api/myApi/v1/torretinfocollection";
+    private final static String ADDS_ENEMY = "https://redarmyserver.appspot.com/_ah/api/myApi/v1/torretinfocollection";
 
     @Test
-    public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
+    public void saveItemsIntoEnemyMessageJson() throws Exception {
+        Gson gson = new Gson();
+        ParseJson parse = new ParseJson();
+
+        String json = parse.readUrl(ADDS_ENEMY);
+        EnemyMessageJson msg = gson.fromJson(json, EnemyMessageJson.class);
+
+        assertEquals(3, msg.getItems().size());
     }
-
-
-
-    @Test
-    public void haveItems() throws Exception {
-
-                        ParseJson parse = new ParseJson();
-                        String json = parse.readUrl(ADDS_ENEMY);
-
-                        Gson gson = new Gson();
-
-                        EnemyMessageJson msg = gson.fromJson(json, EnemyMessageJson.class);
-
-                        assertTrue(msg.getItems().size()>0);
-
-    }
-
-
 
 
 }
