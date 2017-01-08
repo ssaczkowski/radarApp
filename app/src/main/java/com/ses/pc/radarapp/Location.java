@@ -49,4 +49,13 @@ this.longitude = longitude;
 
 
 
+
+	/**
+	* Create string representation of Location for printing
+	* @return
+	*/
+  	@Override
+  	public String toString() {
+  		return "Location [latitude=" + latitude + ", longitude=" + longitude + "]";
+  	}
 }
