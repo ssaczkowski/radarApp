@@ -35,21 +35,31 @@ public class MainActivityTest {
 
     @Test
     public void verifyLocations() throws Exception {
+        ParseJson parse = new ParseJson();
+        Gson gson = new Gson();
 
-                        ParseJson parse = new ParseJson();
-                        Gson gson = new Gson();
+        String json = parse.readUrl(ADDS_ENEMY);
+        EnemyMessageJson msg = gson.fromJson(json, EnemyMessageJson.class);
+        ArrayList<Location> locations= new ArrayList<Location>();
 
-                        String json = parse.readUrl(ADDS_ENEMY);
-                        EnemyMessageJson msg = gson.fromJson(json, EnemyMessageJson.class);
-                        ArrayList<Location> locations= new ArrayList<Location>();
+        for(int i=0; i < msg.getItems().size(); i++){
+            locations.add(msg.getItems().get(i).getLocation());
+        }
 
-                        for(int i=0; i < msg.getItems().size(); i++){
-                          locations.add(msg.getItems().get(i).getLocation());
-                        }
-
-
-                        assertEquals(locations.toString(),"[Location [latitude=-34.58211, longitude=-58.433987], Location [latitude=-34.587482, longitude=-58.43772], Location [latitude=-34.583927, longitude=-58.44078]]");
+        assertEquals(locations.toString(),"[Location [latitude=-34.58211, longitude=-58.433987], Location [latitude=-34.587482, longitude=-58.43772], Location [latitude=-34.583927, longitude=-58.44078]]");
     }
 
+    @Test
+    public void verifyLatitude() throws Exception {
+        ParseJson parse = new ParseJson();
+        Gson gson = new Gson();
+
+        String json = parse.readUrl(ADDS_ENEMY);
+        EnemyMessageJson msg = gson.fromJson(json, EnemyMessageJson.class);
+
+        assertEquals(-34.58211,  msg.getItems().get(0).getLocation().getLatitude(), 0.0);
+        assertEquals(-34.587482, msg.getItems().get(1).getLocation().getLatitude(), 0.0);
+        assertEquals(-34.583927, msg.getItems().get(2).getLocation().getLatitude(), 0.0);
+    }
 
 }
