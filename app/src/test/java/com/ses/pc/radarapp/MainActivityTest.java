@@ -62,4 +62,17 @@ public class MainActivityTest {
         assertEquals(-34.583927, msg.getItems().get(2).getLocation().getLatitude(), 0.0);
     }
 
+    @Test
+    public void verifylongitude() throws Exception {
+        ParseJson parse = new ParseJson();
+        Gson gson = new Gson();
+
+        String json = parse.readUrl(ADDS_ENEMY);
+        EnemyMessageJson msg = gson.fromJson(json, EnemyMessageJson.class);
+
+        assertEquals(-58.433987,  msg.getItems().get(0).getLocation().getLongitude(), 0.0);
+        assertEquals(-58.43772, msg.getItems().get(1).getLocation().getLongitude(), 0.0);
+        assertEquals(-58.44078, msg.getItems().get(2).getLocation().getLongitude(), 0.0);
+    }
+
 }
