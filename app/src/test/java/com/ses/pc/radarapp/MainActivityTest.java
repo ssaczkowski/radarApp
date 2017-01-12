@@ -13,11 +13,6 @@ import android.util.Log;
 
 import static org.junit.Assert.*;
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
 public class MainActivityTest {
 
     private final static String ADDS_ENEMY = "https://redarmyserver.appspot.com/_ah/api/myApi/v1/torretinfocollection";
@@ -84,6 +79,21 @@ public class MainActivityTest {
         EnemyMessageJson msg = gson.fromJson(json, EnemyMessageJson.class);
 
         assertEquals(1,  msg.getItems().get(0).getRadius());
+        assertEquals(1,  msg.getItems().get(1).getRadius());
+        assertEquals(1,  msg.getItems().get(2).getRadius());
+    }
+
+    @Test
+    public void testGetCode() throws Exception {
+        ParseJson parse = new ParseJson();
+        Gson gson = new Gson();
+
+        String json = parse.readUrl(ADDS_ENEMY);
+        EnemyMessageJson msg = gson.fromJson(json, EnemyMessageJson.class);
+
+        assertEquals("RollLaser",  msg.getItems().get(0).getCode());
+        assertEquals("BumeranTower",  msg.getItems().get(1).getCode());
+        assertEquals("Pancu002",  msg.getItems().get(2).getCode());
     }
 
 }
