@@ -23,7 +23,7 @@ public class MainActivityTest {
     private final static String ADDS_ENEMY = "https://redarmyserver.appspot.com/_ah/api/myApi/v1/torretinfocollection";
 
     @Test
-    public void saveItemsIntoEnemyMessageJson() throws Exception {
+    public void testSaveItemsIntoEnemyMessageJson() throws Exception {
         Gson gson = new Gson();
         ParseJson parse = new ParseJson();
 
@@ -34,7 +34,7 @@ public class MainActivityTest {
     }
 
     @Test
-    public void verifyLocations() throws Exception {
+    public void testVerifyLocations() throws Exception {
         ParseJson parse = new ParseJson();
         Gson gson = new Gson();
 
@@ -50,7 +50,7 @@ public class MainActivityTest {
     }
 
     @Test
-    public void verifyLatitude() throws Exception {
+    public void testVerifyLatitude() throws Exception {
         ParseJson parse = new ParseJson();
         Gson gson = new Gson();
 
@@ -63,7 +63,7 @@ public class MainActivityTest {
     }
 
     @Test
-    public void verifylongitude() throws Exception {
+    public void testVerifylongitude() throws Exception {
         ParseJson parse = new ParseJson();
         Gson gson = new Gson();
 
@@ -73,6 +73,17 @@ public class MainActivityTest {
         assertEquals(-58.433987,  msg.getItems().get(0).getLocation().getLongitude(), 0.0);
         assertEquals(-58.43772, msg.getItems().get(1).getLocation().getLongitude(), 0.0);
         assertEquals(-58.44078, msg.getItems().get(2).getLocation().getLongitude(), 0.0);
+    }
+
+    @Test
+    public void testGetRadius() throws Exception {
+        ParseJson parse = new ParseJson();
+        Gson gson = new Gson();
+
+        String json = parse.readUrl(ADDS_ENEMY);
+        EnemyMessageJson msg = gson.fromJson(json, EnemyMessageJson.class);
+
+        assertEquals(1,  msg.getItems().get(0).getRadius());
     }
 
 }
