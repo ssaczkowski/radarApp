@@ -14,14 +14,14 @@ import com.google.gson.Gson;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private final static String ADDS_ENEMY = "https://redarmyserver.appspot.com/_ah/api/myApi/v1/torretinfocollection";
+    private final static String ADDS_ENEMY="https://redarmyserver.appspot.com/_ah/api/myApi/v1/torretinfocollection";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        SupportMapFragment mapFragment=(SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
@@ -29,24 +29,44 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
 
-        Gson gson = new Gson();
-        ParseJson parse = new ParseJson();
 
         try {
-            String json = null;
-            json = parse.readUrl(ADDS_ENEMY);
-            EnemyMessageJson msg = gson.fromJson(json, EnemyMessageJson.class);
-            Double latitude = msg.getItems().get(0).getLocation().getLatitude();
-            Double longitude = msg.getItems().get(0).getLocation().getLongitude();
-            LatLng palermo = new LatLng(latitude, longitude);
-            mMap.addMarker(new MarkerOptions().position(palermo).title("Gonza Tiene lo que quieren las wachas!"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(palermo));
+            mMap=googleMap;
+            Location location=this.getLocalizationWeapon();
+
+
+            System.out.println("SASASASASASAA" + location.getLatitude());
+            System.out.println("SASASASASASAA" + location.getLongitude());
+
+
+            LatLng weaponLocation=new LatLng(location.getLatitude(), location.getLongitude());
+
+            mMap.addMarker(new MarkerOptions().position(weaponLocation).title("misil"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(weaponLocation));
+
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("MENSAJEEEEEE:"+e.getMessage());
         }
-        
-        //LatLng palermo = new LatLng(-34.58211, -58.433987);
+
     }
+
+    public Location getLocalizationWeapon() throws Exception {
+
+
+        Location location=new Location();
+        ParseJson parse=new ParseJson();
+        Gson gson=new Gson();
+
+        String json=parse.readUrl(ADDS_ENEMY);
+
+        EnemyMessageJson msg=gson.fromJson(json, EnemyMessageJson.class);
+
+        location.setLatitude(msg.getItems().get(0).getLocation().getLatitude());
+        location.setLongitude(msg.getItems().get(0).getLocation().getLongitude());
+
+        return location;
+    }
+
+
 }
