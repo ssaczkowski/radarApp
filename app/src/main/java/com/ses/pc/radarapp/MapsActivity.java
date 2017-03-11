@@ -1,5 +1,6 @@
 package com.ses.pc.radarapp;
 
+import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -8,9 +9,13 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
+
+import static com.ses.pc.radarapp.R.id.map;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -28,7 +33,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(map);
         mapFragment.getMapAsync(this);
     }
 
@@ -39,10 +44,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         try {
             mMap = googleMap;
-            Location location = this.getLocalizationWeapon();
+            EnemyMessageJson dataWeapon = this.getDataWeapon();
 
-            LatLng weaponLocation = new LatLng(location.getLatitude(), location.getLongitude());
-
+            LatLng weaponLocation = new LatLng(dataWeapon.getItems().get(0).getLocation().getLatitude(), dataWeapon.getItems().get(0).getLocation().getLongitude());
+            mMap.addCircle(new CircleOptions()
+                    .center(new LatLng(dataWeapon.getItems().get(0).getLocation().getLatitude(), dataWeapon.getItems().get(0).getLocation().getLongitude()))
+                    .radius(dataWeapon.getItems().get(0).getRadius())
+                    .strokeColor(Color.RED)
+                    .fillColor(Color.rgb(255, 117, 020)));
             mMap.addMarker(new MarkerOptions().position(weaponLocation).title("misil"));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(weaponLocation));
 
@@ -52,10 +61,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    public Location getLocalizationWeapon() throws Exception {
+    public EnemyMessageJson getDataWeapon() throws Exception {
 
 
-        Location location = new Location();
+        //Location location = new Location();
         ParseJson parse = new ParseJson();
         Gson gson = new Gson();
 
@@ -63,10 +72,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         EnemyMessageJson msg = gson.fromJson(json, EnemyMessageJson.class);
 
-        location.setLatitude(msg.getItems().get(0).getLocation().getLatitude());
-        location.setLongitude(msg.getItems().get(0).getLocation().getLongitude());
+        //location.setLatitude(msg.getItems().get(0).getLocation().getLatitude());
+        //location.setLongitude(msg.getItems().get(0).getLocation().getLongitude());
 
-        return location;
+        return msg;
     }
 
 }

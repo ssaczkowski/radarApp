@@ -22,7 +22,7 @@ public class ParseTest {
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
     }
-
+/*
     @Test
     public void parse() throws Exception {
         ParseJson parse = new ParseJson();
@@ -67,7 +67,7 @@ public class ParseTest {
     }
 
 
-/*
+
 
     @Test
     public void parseGson() throws Exception {
